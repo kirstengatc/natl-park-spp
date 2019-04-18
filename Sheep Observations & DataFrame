@@ -1,0 +1,36 @@
+import codecademylib
+import pandas as pd
+from matplotlib import pyplot as plt
+
+species = pd.read_csv('species_info.csv')
+species.fillna('No Intervention', inplace = True)
+species['is_protected'] = species.conservation_status != 'No Intervention'
+
+#10.1
+observations = pd.read_csv('observations.csv')
+#10.2
+print observations.head()
+
+#11.1
+species['is_sheep'] = species.common_names.apply(lambda x: 'Sheep' in x)
+print species.head()
+
+#11.2
+species_is_sheep =species[species.is_sheep == True]
+#11.3
+print species_is_sheep
+
+#11.4
+sheep_species = species[(species.is_sheep==True) &                     (species.category=='Mammal')]
+
+print sheep_species
+#there are 3 observations of sheep in the species database
+
+#12.1-2
+sheep_observations = pd.merge(sheep_species,observations)
+print sheep_observations.head()
+
+#12.3
+obs_by_park = sheep_observations.groupby('park_name').observations.sum().reset_index()
+
+print obs_by_park
