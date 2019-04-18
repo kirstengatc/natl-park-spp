@@ -1,0 +1,37 @@
+import codecademylib
+#1.1
+from matplotlib import pyplot as plt
+import pandas as pd
+
+#1.2
+species = pd.read_csv('species_info.csv')
+print(species.head())
+
+#2.1
+species_count = species.scientific_name.nunique()
+print species_count
+#5541 unique species in data frame
+
+#2.2
+species_type =species.category.unique()
+print species_type
+# Mammal, Bird, Reptile, Amphibian, Fish, Vascular Plant, Nonvascular Plant
+
+#2.3
+conservation_statuses = species.conservation_status.unique()
+print conservation_statuses
+#N/A, Species of Concern, Endangered, Threatened, In Recovery
+
+#3.1
+conservation_counts = species.groupby('conservation_status').scientific_name.nunique().reset_index()
+print conservation_counts
+#endangered = 15, Recovery = 4, Spp of concern =151, Threatened =10
+
+#4.1
+species.fillna('No Intervention', inplace = True)
+
+#4.2
+conservation_counts_fixed = species.groupby('conservation_status').scientific_name.nunique().reset_index()
+print conservation_counts_fixed
+#No Intervention = 5363
+
