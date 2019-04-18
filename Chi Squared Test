@@ -1,0 +1,23 @@
+import codecademylib
+import pandas as pd
+from matplotlib import pyplot as plt
+
+#8.1
+contingency = [[30,146],
+               [75,413]]
+
+#8.2
+from scipy.stats import chi2_contingency
+
+#8.3
+chi2, pval, dof, expected = chi2_contingency(contingency)
+print pval
+#pval = 0.69, so not significant
+
+#8.4
+X =[[5, 73],
+   [30,146]]
+chi2, pval_reptile_mammal, dof, expected = chi2_contingency(X)
+print pval_reptile_mammal
+#pval_reptile_mammal = 0.04, so yes, is significant.
+#so, yes, certain kinds of species are more likely to be endangered than others. in this case, reptiles.
