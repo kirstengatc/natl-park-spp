@@ -1,0 +1,29 @@
+import codecademylib
+import pandas as pd
+from matplotlib import pyplot as plt
+
+species = pd.read_csv('species_info.csv')
+
+species.fillna('No Intervention', inplace = True)
+#5.1
+protection_counts = species.groupby('conservation_status')\
+    .scientific_name.nunique().reset_index()\
+    .sort_values(by='scientific_name')
+print protection_counts
+
+#5.2
+x= protection_counts.conservation_status
+y=protection_counts.scientific_name
+
+plt.figure(figsize=(10,4))
+plt.bar(range(len(x)), y)
+
+#create your ax object here
+ax = plt.subplot()
+ax.set_xticks(range(len(x)))
+ax.set_xticklabels(x, rotation=30)
+
+plt.title('Conservation Status by Species')
+plt.ylabel ('Number of Species')
+
+plt.show()
